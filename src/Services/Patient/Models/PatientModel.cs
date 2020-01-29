@@ -31,7 +31,7 @@ namespace Patient.Models
 
         [Required]
         [MaxLength(50)]
-        // TODO Use Regex to validate
+        [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Invalid Phone Number")]
         public string Phone { get; set; }
     }
 }
