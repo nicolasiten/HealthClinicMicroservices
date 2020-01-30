@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Patient.Attributes
+namespace Patient.Common.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class MaxDateTodayValidationAttribute : ValidationAttribute

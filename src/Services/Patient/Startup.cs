@@ -4,16 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Patient.Infrastructure;
-using Patient.Interfaces;
+using Patient.Common.Interfaces;
 using Patient.Services;
+using Patient.Common.Middleware;
 
 namespace Patient
 {
@@ -49,6 +48,8 @@ namespace Patient
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 
             app.UseAuthorization();
 

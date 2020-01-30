@@ -1,4 +1,4 @@
-﻿using Patient.Attributes;
+﻿using Patient.Common.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +9,8 @@ namespace Patient.Models
 {
     public class PatientModel
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(200)]
         public string Family { get; set; }
