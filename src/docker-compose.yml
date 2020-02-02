@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  gateway:
+    image: gateway
+    build:
+      context: .
+      dockerfile: ApiGateways/Gateway/Dockerfile
+
+  patient:
+    image: patient
+    build:
+      context: .
+      dockerfile: Services/Patient/Dockerfile

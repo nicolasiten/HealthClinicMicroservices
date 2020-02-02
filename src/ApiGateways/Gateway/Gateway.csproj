@@ -5,6 +5,7 @@
     <UserSecretsId>abd57fd2-4875-4d5b-b00b-ac3c91c7f0fb</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>

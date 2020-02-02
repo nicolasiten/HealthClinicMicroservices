@@ -45,8 +45,6 @@ namespace Patient
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseMiddleware<CustomExceptionHandlerMiddleware>();
