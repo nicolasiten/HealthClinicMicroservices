@@ -1,11 +1,12 @@
 ﻿using HealthClinic.Common.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Patient.Models
+namespace HealthClinic.Web.Models
 {
     public class PatientModel
     {
@@ -21,6 +22,7 @@ namespace Patient.Models
 
         [Required]
         [MaxDateTodayValidation]
+        [DataType(DataType.Date)]
         public DateTime Dob { get; set; }
 
         [Required]

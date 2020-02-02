@@ -12,3 +12,9 @@ services:
     build:
       context: .
       dockerfile: Services/Patient/Dockerfile
+
+  frontend:
+    image: frontend
+    build:
+      context: .
+      dockerfile: Web/HealthClinic.Web/Dockerfile

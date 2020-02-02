@@ -16,3 +16,11 @@ services:
     ports:
       - "80"
       - "443"
+
+  frontend:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
