@@ -25,9 +25,9 @@ namespace HealthClinic.Web.Services
 
         public async Task Create(PatientModel patientModel)
         {
-            var patientContent = new StringContent(JsonConvert.SerializeObject(patientModel), Encoding.UTF8, "application/json");
-
-            var response = await _httpClient.PostAsync(_baseUrl, patientContent);
+            var content = new StringContent(JsonConvert.SerializeObject(patientModel), Encoding.UTF8, "application/json");
+            
+            var response = await _httpClient.PostAsync(_baseUrl, content);
             response.EnsureSuccessStatusCode();
         }
     }
