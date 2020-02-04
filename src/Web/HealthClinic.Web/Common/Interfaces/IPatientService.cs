@@ -8,6 +8,14 @@ namespace HealthClinic.Web.Common.Interfaces
 {
     public interface IPatientService
     {
-        Task Create(PatientModel patientModel);
+        Task CreateAsync(PatientModel patientModel);
+
+        Task<IEnumerable<PatientModel>> GetAllAsync();
+
+        Task<PatientModel> GetByIdAsync(int id);
+
+        Task DeleteAsync(int id);
+
+        Task UpdateAsync(int id, PatientModel patientModel);
     }
 }

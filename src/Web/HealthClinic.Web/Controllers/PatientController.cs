@@ -24,11 +24,47 @@ namespace HealthClinic.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(PatientModel patientModel)
+        public async Task<ActionResult> Create(PatientModel patientModel)
         {
-            _patientService.Create(patientModel);
+            await _patientService.CreateAsync(patientModel);
 
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(ViewAll));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var patient = await _patientService.GetByIdAsync(id);
+
+            return View(patient);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, PatientModel patientModel)
+        {
+            await _patientService.UpdateAsync(id, patientModel);
+
+            return RedirectToAction(nameof(ViewAll));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ViewAll()
+        {
+            return View(await _patientService.GetAllAsync());
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Details(int id)
+        {
+            return View(await _patientService.GetByIdAsync(id));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _patientService.DeleteAsync(id);
+
+            return RedirectToAction(nameof(ViewAll));
         }
     }
 }
