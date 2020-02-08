@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Patient.Infrastructure;
 using System;
+using System.Linq;
 using System.Net.Http;
 
 namespace Patient.Tests
@@ -14,17 +15,21 @@ namespace Patient.Tests
         {
             builder.ConfigureServices(services =>
             {
+                var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<PatientDbContext>));
+                if (descriptor != null)
+                {
+                    services.Remove(descriptor);
+                }                    
+
                 var serviceProvider = new ServiceCollection()
                     .AddEntityFrameworkInMemoryDatabase()
                     .BuildServiceProvider();
 
                 services.AddDbContext<PatientDbContext>(options =>
                 {
-                    options.UseInMemoryDatabase(Guid.NewGuid().ToString());
+                    options.UseInMemoryDatabase("PatientTestDb");
                     options.UseInternalServiceProvider(serviceProvider);
                 });
-
-                services.AddDbContext<PatientDbContext>();
 
                 var sp = services.BuildServiceProvider();
 
@@ -34,7 +39,7 @@ namespace Patient.Tests
                 context.Database.EnsureCreated();
 
                 SeedSampleData(context);
-            });
+            }).UseEnvironment("Test");
         }
 
         private static void SeedSampleData(PatientDbContext dbContext)
