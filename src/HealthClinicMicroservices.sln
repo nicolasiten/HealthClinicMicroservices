@@ -17,9 +17,13 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{0782A6DB-B351-4708-B22C-34C1A945B9E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthClinic.Web", "Web\HealthClinic.Web\HealthClinic.Web.csproj", "{35A8306D-DD9A-492E-91E7-19C815DD7630}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthClinic.Web", "Web\HealthClinic.Web\HealthClinic.Web.csproj", "{35A8306D-DD9A-492E-91E7-19C815DD7630}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthClinic.Common", "Common\HealthClinic.Common\HealthClinic.Common.csproj", "{0F9E0C25-82C9-4574-9B81-52315AA430A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthClinic.Common", "Common\HealthClinic.Common\HealthClinic.Common.csproj", "{0F9E0C25-82C9-4574-9B81-52315AA430A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{55E5FFEE-5C3B-49FB-91FD-AEB830538352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patient.Tests", "Services\Tests\Patient.Tests\Patient.Tests.csproj", "{705497AE-0E4D-47F9-BE0A-0BF9B367530A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{0F9E0C25-82C9-4574-9B81-52315AA430A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F9E0C25-82C9-4574-9B81-52315AA430A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F9E0C25-82C9-4574-9B81-52315AA430A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{705497AE-0E4D-47F9-BE0A-0BF9B367530A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{705497AE-0E4D-47F9-BE0A-0BF9B367530A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{705497AE-0E4D-47F9-BE0A-0BF9B367530A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{705497AE-0E4D-47F9-BE0A-0BF9B367530A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +64,8 @@ Global
 		{7ABD9F7E-359D-44A5-91EB-0A915B859821} = {F5A16BA9-827C-45B9-8609-E65EFD6C431D}
 		{35A8306D-DD9A-492E-91E7-19C815DD7630} = {0782A6DB-B351-4708-B22C-34C1A945B9E6}
 		{0F9E0C25-82C9-4574-9B81-52315AA430A3} = {DF046B86-A46E-46FD-AA39-6C50DD157864}
+		{55E5FFEE-5C3B-49FB-91FD-AEB830538352} = {3B82A1CE-5933-453E-969B-FFCC3F5AA97D}
+		{705497AE-0E4D-47F9-BE0A-0BF9B367530A} = {55E5FFEE-5C3B-49FB-91FD-AEB830538352}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75AB797A-89EB-4E7E-8DAF-CDCD5866DBEA}
