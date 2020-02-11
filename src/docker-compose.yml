@@ -13,6 +13,12 @@ services:
       context: .
       dockerfile: Services/Patient/Dockerfile
 
+  patientnotes:
+    image: patientnotes
+    build:
+      context: .
+      dockerfile: Services/PatientNotes/Dockerfile
+
   frontend:
     image: frontend
     build:
