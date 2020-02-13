@@ -10,6 +10,7 @@ namespace PatientNotes.Entities
     public class BaseEntity
     {
         [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId Id { get; set; }
     }
 }

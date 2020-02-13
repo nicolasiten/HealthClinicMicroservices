@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using PatientNotes.Common.Interfaces;
 using PatientNotes.Infrastructure;
+using PatientNotes.Services;
 
 namespace PatientNotes
 {
@@ -30,6 +31,8 @@ namespace PatientNotes
         {
             services.AddTransient<IMongoClient>(sp => new MongoClient(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient(sp => sp.GetService<IMongoClient>().GetDatabase("PatientNotes"));
+
+            services.AddTransient<IPatientNoteService, PatientNoteService>();
 
             services.AddScoped(typeof(INoSqlDbConnector<>), typeof(NoSqlDbConnector<>));
 
