@@ -24,6 +24,7 @@ namespace PatientNotes.Services
 
         public async Task<IEnumerable<PatientNoteModel>> GetPatientNotesAsync()
         {
+            var test = await _dbConnector.GetAllAsync();
             return (await _dbConnector.GetAllAsync()).Select(p => MapPatientNoteToPatientNoteModel(p)).ToList();
         }
 

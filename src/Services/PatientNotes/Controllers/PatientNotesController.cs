@@ -27,18 +27,35 @@ namespace PatientNotes.Controllers
             return Ok("success");
         }
 
-        // TODO GET
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<PatientNoteModel>>> GetAll()
+        {
+            return (await _patientNoteService.GetPatientNotesAsync()).ToList();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<PatientNoteModel>>> GetAllByPatientId(int patientId)
+        {
+            return (await _patientNoteService.GetPatientNotesByPatientIdAsync(patientId)).ToList();
+        }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(string notes)
+        public async Task<ActionResult> Update(string id, PatientNoteModel patientNoteModel)
         {
+            if (id != patientNoteModel.Id)
+            {
+                return BadRequest();
+            }
+
+            await _patientNoteService.UpdatePatientAsync(patientNoteModel);
 
             return Ok("success");
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete()
+        public async Task<ActionResult> Delete(string id)
         {
+            await _patientNoteService.DeletePatientAsync(id);
 
             return Ok("success");
         }        
