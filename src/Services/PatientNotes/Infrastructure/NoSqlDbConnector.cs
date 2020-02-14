@@ -27,12 +27,12 @@ namespace PatientNotes.Infrastructure
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _mongoDatabase.GetCollection<T>(nameof(T)).Find(_ => true).ToListAsync();
+            return await _mongoDatabase.GetCollection<T>(typeof(T).Name).Find(_ => true).ToListAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllByFilterAsync(Expression<Func<T, bool>> filter)
         {
-            return await _mongoDatabase.GetCollection<T>(nameof(T)).Find(filter).ToListAsync();
+            return await _mongoDatabase.GetCollection<T>(typeof(T).Name).Find(filter).ToListAsync();
         }
 
         public async Task UpdateAsync(T entity)

@@ -33,7 +33,7 @@ namespace PatientNotes.Controllers
             return (await _patientNoteService.GetPatientNotesAsync()).ToList();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{patientId}")]
         public async Task<ActionResult<List<PatientNoteModel>>> GetAllByPatientId(int patientId)
         {
             return (await _patientNoteService.GetPatientNotesByPatientIdAsync(patientId)).ToList();
