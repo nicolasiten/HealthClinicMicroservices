@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using HealthClinic.Common.Exceptions;
+using MongoDB.Driver;
 using PatientNotes.Common.Interfaces;
 using PatientNotes.Entities;
 using System;
@@ -37,15 +38,25 @@ namespace PatientNotes.Infrastructure
 
         public async Task UpdateAsync(T entity)
         {
-            await _mongoDatabase.GetCollection<T>(typeof(T).Name).ReplaceOneAsync(
+            var result = await _mongoDatabase.GetCollection<T>(typeof(T).Name).ReplaceOneAsync(
                 item => item.Id == entity.Id,
                 entity,
                 new ReplaceOptions { IsUpsert = false });
+
+            if (!result.IsAcknowledged || result.MatchedCount < 1)
+            {
+                throw new NotFoundException(typeof(T).Name, entity.Id.ToString());
+            }
         }
 
         public async Task DeleteAsync(string id)
         {
-            await _mongoDatabase.GetCollection<T>(typeof(T).Name).DeleteOneAsync(item => item.Id == new MongoDB.Bson.ObjectId(id));
+            var result = await _mongoDatabase.GetCollection<T>(typeof(T).Name).DeleteOneAsync(item => item.Id == new MongoDB.Bson.ObjectId(id));
+
+            if (!result.IsAcknowledged || result.DeletedCount < 1)
+            {
+                throw new NotFoundException(typeof(T).Name, id);
+            }
         }
     }
 }

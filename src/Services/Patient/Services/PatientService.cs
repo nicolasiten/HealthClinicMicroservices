@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Patient.Common.Exceptions;
 using Patient.Infrastructure;
 using Patient.Common.Interfaces;
 using Patient.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HealthClinic.Common.Exceptions;
 
 namespace Patient.Services
 {

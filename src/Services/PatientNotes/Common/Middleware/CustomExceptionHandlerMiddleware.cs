@@ -5,7 +5,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Patient.Common.Middleware
+namespace PatientNotes.Common.Middleware
 {
     /// <summary>
     /// .Net Core Middleware - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-3.1

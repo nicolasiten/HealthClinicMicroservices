@@ -45,12 +45,18 @@ namespace PatientNotes.Services
 
         private PatientNote MapPatientNoteModelToPatientNote(PatientNoteModel patientNoteModel)
         {
-            return new PatientNote
+            var patientNote = new PatientNote
             {
-                Id = new MongoDB.Bson.ObjectId(patientNoteModel.Id),
                 Note = patientNoteModel.Note,
                 PatientId = patientNoteModel.PatientId
             };
+
+            if (!string.IsNullOrEmpty(patientNoteModel.Id))
+            {
+                patientNote.Id = new MongoDB.Bson.ObjectId(patientNoteModel.Id ?? string.Empty);
+            }
+
+            return patientNote;
         }
 
         private PatientNoteModel MapPatientNoteToPatientNoteModel(PatientNote patientNote)

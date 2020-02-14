@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using PatientNotes.Common.Interfaces;
+using PatientNotes.Common.Middleware;
 using PatientNotes.Infrastructure;
 using PatientNotes.Services;
 
@@ -48,6 +49,8 @@ namespace PatientNotes
             }
 
             app.UseRouting();
+
+            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 
             app.UseAuthorization();
 
