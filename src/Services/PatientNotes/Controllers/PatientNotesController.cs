@@ -50,14 +50,6 @@ namespace PatientNotes.Controllers
             await _patientNoteService.UpdatePatientAsync(patientNoteModel);
 
             return Ok("success");
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(string id)
-        {
-            await _patientNoteService.DeletePatientAsync(id);
-
-            return Ok("success");
         }        
     }
 }

@@ -34,6 +34,7 @@ namespace PatientNotes
             services.AddTransient(sp => sp.GetService<IMongoClient>().GetDatabase("PatientNotes"));
 
             services.AddTransient<IPatientNoteService, PatientNoteService>();
+            services.AddHttpClient<IPatientService, PatientService>();
 
             services.AddScoped(typeof(INoSqlDbConnector<>), typeof(NoSqlDbConnector<>));
 

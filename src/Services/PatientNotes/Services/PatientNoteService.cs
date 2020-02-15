@@ -1,4 +1,5 @@
-﻿using PatientNotes.Common.Interfaces;
+﻿using HealthClinic.Common.Exceptions;
+using PatientNotes.Common.Interfaces;
 using PatientNotes.Entities;
 using PatientNotes.Models;
 using System;
@@ -11,14 +12,21 @@ namespace PatientNotes.Services
     public class PatientNoteService : IPatientNoteService
     {
         private readonly INoSqlDbConnector<PatientNote> _dbConnector;
+        private readonly IPatientService _patientService;
 
-        public PatientNoteService(INoSqlDbConnector<PatientNote> dbConnector)
+        public PatientNoteService(INoSqlDbConnector<PatientNote> dbConnector, IPatientService patientService)
         {
             _dbConnector = dbConnector;
+            _patientService = patientService;
         }
 
         public async Task SavePatientNoteAsync(PatientNoteModel patientNote)
         {
+            if (!await _patientService.PatientExists(patientNote.PatientId))
+            {
+                throw new NotFoundException("Patient", patientNote.PatientId);
+            }
+
             await _dbConnector.InsertAsync(MapPatientNoteModelToPatientNote(patientNote));
         }
 
@@ -34,6 +42,11 @@ namespace PatientNotes.Services
 
         public async Task UpdatePatientAsync(PatientNoteModel patientNoteModel)
         {
+            if (!await _patientService.PatientExists(patientNoteModel.PatientId))
+            {
+                throw new NotFoundException("Patient", patientNoteModel.PatientId);
+            }
+
             var patientNoteEntity = MapPatientNoteModelToPatientNote(patientNoteModel);
             await _dbConnector.UpdateAsync(patientNoteEntity);
         }

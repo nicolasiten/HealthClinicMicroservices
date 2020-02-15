@@ -54,13 +54,5 @@ namespace Patient.Controllers
 
             return Ok("success");
         }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            await _patientService.DeletePatientAsync(id);
-
-            return Ok("success");
-        }
     }
 }
