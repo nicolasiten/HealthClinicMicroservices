@@ -51,7 +51,8 @@
 </div>
 
 <div>
-    <a asp-action="ViewAll">Back to List</a>
+    <a asp-action="ViewAll">Back to List</a> |
+    <a asp-action="Create" asp-controller="PatientNote" asp-route-patientId="@Model.Id">Add Note</a>
 </div>
 
 @section Scripts {

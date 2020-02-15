@@ -62,7 +62,7 @@
                 Edited: @(note.Edited != DateTime.MinValue ? note.Edited.ToString("dd/MM/yyyy") : "-")
             </dt>
             <dd class="col-sm-8">
-                @note.Note
+                <div style="white-space: pre-wrap">@note.Note</div>                
             </dd>
             <dd class="col-sm-2">
                 @Html.ActionLink("Edit", "Edit", "PatientNote", new { id = note.Id })
@@ -72,5 +72,6 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Patient.Id }) |
-    <a asp-action="ViewAll">Back to List</a>
+    <a asp-action="ViewAll">Back to List</a>  |
+    <a asp-action="Create" asp-controller="PatientNote" asp-route-patientId="@Model.Patient.Id">Add Note</a>
 </div>

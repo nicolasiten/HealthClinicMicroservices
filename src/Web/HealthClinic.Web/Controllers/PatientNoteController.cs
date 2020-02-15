@@ -32,5 +32,19 @@ namespace HealthClinic.Web.Controllers
 
             return RedirectToAction("Details", "Patient", new { id = patientNoteModel.PatientId });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Create(int patientId)
+        {
+            return View(new PatientNoteModel { PatientId = patientId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(PatientNoteModel patientNoteModel)
+        {
+            await _patientNoteService.CreateAsync(patientNoteModel);
+
+            return RedirectToAction("Details", "Patient", new { id = patientNoteModel.PatientId });
+        }
     }
 }
