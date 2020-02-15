@@ -14,6 +14,8 @@ namespace PatientNotes.Common.Interfaces
 
         Task<IEnumerable<PatientNoteModel>> GetPatientNotesByPatientIdAsync(int patientId);
 
+        Task<PatientNoteModel> GetPatientNoteByIdAsync(string id);
+
         Task UpdatePatientAsync(PatientNoteModel patientNoteModel);
 
         Task DeletePatientAsync(string patientNoteId);

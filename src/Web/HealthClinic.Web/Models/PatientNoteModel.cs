@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PatientNotes.Models
+namespace HealthClinic.Web.Models
 {
     public class PatientNoteModel
     {

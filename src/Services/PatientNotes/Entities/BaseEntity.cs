@@ -12,5 +12,9 @@ namespace PatientNotes.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId Id { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public DateTime Edited { get; set; }
     }
 }

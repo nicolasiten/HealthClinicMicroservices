@@ -1,4 +1,4 @@
-﻿@model HealthClinic.Web.Models.PatientModel
+﻿@model HealthClinic.Web.Models.PatientDetailModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,51 +10,67 @@
     <h4>PatientModel</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.Id)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Id)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Family)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.Family)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Family)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Family)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Given)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.Given)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Given)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Given)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dob)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.Dob)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dob)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Dob)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sex)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.Sex)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sex)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Sex)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.Address)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Address)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.Phone)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Phone)
         </dd>
+        <dt class="col-sm-12">
+            Notes
+        </dt>
+        @foreach (PatientNoteModel note in Model.PatientNotes)
+        {
+            <dt class="col-sm-2">
+                Created: @note.Created.ToString("dd/MM/yyyy")
+                Edited: @(note.Edited != DateTime.MinValue ? note.Edited.ToString("dd/MM/yyyy") : "-")
+            </dt>
+            <dd class="col-sm-8">
+                @note.Note
+            </dd>
+            <dd class="col-sm-2">
+                @Html.ActionLink("Edit", "Edit", "PatientNote", new { id = note.Id })
+            </dd>
+        }
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Patient.Id }) |
     <a asp-action="ViewAll">Back to List</a>
 </div>

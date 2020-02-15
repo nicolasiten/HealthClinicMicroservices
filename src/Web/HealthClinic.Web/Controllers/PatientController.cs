@@ -11,10 +11,12 @@ namespace HealthClinic.Web.Controllers
     public class PatientController : Controller
     {
         private readonly IPatientService _patientService;
+        private readonly IPatientNoteService _patientNoteService;
 
-        public PatientController(IPatientService patientService)
+        public PatientController(IPatientService patientService, IPatientNoteService patientNoteService)
         {
             _patientService = patientService;
+            _patientNoteService = patientNoteService;
         }
 
         [HttpGet]
@@ -56,15 +58,13 @@ namespace HealthClinic.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(int id)
         {
-            return View(await _patientService.GetByIdAsync(id));
-        }
+            var patientDetailModel = new PatientDetailModel
+            {
+                Patient = await _patientService.GetByIdAsync(id),
+                PatientNotes = await _patientNoteService.GetByPatientIdAsync(id)
+            };
 
-        [HttpGet]
-        public async Task<ActionResult> Delete(int id)
-        {
-            await _patientService.DeleteAsync(id);
-
-            return RedirectToAction(nameof(ViewAll));
+            return View(patientDetailModel);
         }
     }
 }

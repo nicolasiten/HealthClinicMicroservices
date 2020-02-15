@@ -54,11 +54,5 @@ namespace HealthClinic.Web.Services
 
             return JsonConvert.DeserializeObject<PatientModel>(responseString);
         }
-
-        public async Task DeleteAsync(int id)
-        {
-            var response = await _httpClient.DeleteAsync($"{_baseUrl}{id}");
-            response.EnsureSuccessStatusCode();
-        }
     }
 }

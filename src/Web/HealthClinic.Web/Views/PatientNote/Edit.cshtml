@@ -1,0 +1,41 @@
+﻿@model HealthClinic.Web.Models.PatientNoteModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PatientNoteModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.Hidden("Id")
+            @Html.Hidden("PatientId")
+            @Html.Hidden("Created")
+            @Html.Hidden("Edited")
+        <div class="form-group">
+            Created: @Model.Created.ToString("dd/MM/yyyy")
+            Edited: @(Model.Edited != DateTime.MinValue ? Model.Edited.ToString("dd/MM/yyyy") : "-")
+        </div>
+            <div class="form-group">
+                <label asp-for="Note" class="control-label"></label>
+                <input asp-for="Note" class="form-control" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

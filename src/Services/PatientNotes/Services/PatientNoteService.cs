@@ -40,6 +40,18 @@ namespace PatientNotes.Services
             return (await _dbConnector.GetAllByFilterAsync(p => p.PatientId == patientId)).Select(p => MapPatientNoteToPatientNoteModel(p)).ToList();
         }
 
+        public async Task<PatientNoteModel> GetPatientNoteByIdAsync(string id)
+        {
+            var patientNote = (await _dbConnector.GetAllByFilterAsync(p => p.Id == new MongoDB.Bson.ObjectId(id))).SingleOrDefault();
+
+            if (patientNote == null)
+            {
+                throw new NotFoundException("PatientNote", id);
+            }
+
+            return MapPatientNoteToPatientNoteModel(patientNote);
+        }
+
         public async Task UpdatePatientAsync(PatientNoteModel patientNoteModel)
         {
             if (!await _patientService.PatientExists(patientNoteModel.PatientId))
@@ -61,7 +73,9 @@ namespace PatientNotes.Services
             var patientNote = new PatientNote
             {
                 Note = patientNoteModel.Note,
-                PatientId = patientNoteModel.PatientId
+                PatientId = patientNoteModel.PatientId,
+                Created = patientNoteModel.Created,
+                Edited = patientNoteModel.Edited
             };
 
             if (!string.IsNullOrEmpty(patientNoteModel.Id))
@@ -78,7 +92,9 @@ namespace PatientNotes.Services
             {
                 Id = patientNote.Id.ToString(),
                 Note = patientNote.Note,
-                PatientId = patientNote.PatientId
+                PatientId = patientNote.PatientId,
+                Created = patientNote.Created,
+                Edited = patientNote.Edited
             };
         }
     }

@@ -37,5 +37,7 @@ namespace HealthClinic.Web.Models
         [MaxLength(50)]
         [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Invalid Phone Number")]
         public string Phone { get; set; }
+
+        public PatientNoteModel PatientNoteModel { get; set; }
     }
 }

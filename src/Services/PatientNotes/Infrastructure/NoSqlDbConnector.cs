@@ -22,6 +22,7 @@ namespace PatientNotes.Infrastructure
 
         public async Task<T> InsertAsync(T entity)
         {
+            entity.Created = DateTime.Now;
             await _mongoDatabase.GetCollection<T>(typeof(T).Name).InsertOneAsync(entity);
             return entity;
         }
@@ -38,6 +39,7 @@ namespace PatientNotes.Infrastructure
 
         public async Task UpdateAsync(T entity)
         {
+            entity.Edited = DateTime.Now;
             var result = await _mongoDatabase.GetCollection<T>(typeof(T).Name).ReplaceOneAsync(
                 item => item.Id == entity.Id,
                 entity,

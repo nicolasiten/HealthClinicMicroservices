@@ -14,8 +14,6 @@ namespace HealthClinic.Web.Common.Interfaces
 
         Task<PatientModel> GetByIdAsync(int id);
 
-        Task DeleteAsync(int id);
-
         Task UpdateAsync(int id, PatientModel patientModel);
     }
 }
