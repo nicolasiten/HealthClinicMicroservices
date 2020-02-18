@@ -19,6 +19,12 @@ services:
       context: .
       dockerfile: Services/PatientNotes/Dockerfile
 
+  diabetesrisk:
+    image: diabetesrisk
+    build:
+      context: .
+      dockerfile: Services/DiabetesRisk/Dockerfile
+
   frontend:
     image: frontend
     build:

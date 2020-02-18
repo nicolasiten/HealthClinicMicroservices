@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientNotes", "Services\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientNotes.Tests", "Services\Tests\PatientNotes.Tests\PatientNotes.Tests.csproj", "{9FD727CB-EC5E-454F-906F-9F7F2A578AAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabetesRisk", "Services\DiabetesRisk\DiabetesRisk.csproj", "{C98BECBB-66EC-4087-824B-394F696F6D17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{9FD727CB-EC5E-454F-906F-9F7F2A578AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FD727CB-EC5E-454F-906F-9F7F2A578AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FD727CB-EC5E-454F-906F-9F7F2A578AAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C98BECBB-66EC-4087-824B-394F696F6D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C98BECBB-66EC-4087-824B-394F696F6D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C98BECBB-66EC-4087-824B-394F696F6D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C98BECBB-66EC-4087-824B-394F696F6D17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{705497AE-0E4D-47F9-BE0A-0BF9B367530A} = {55E5FFEE-5C3B-49FB-91FD-AEB830538352}
 		{161DD520-EBD5-4D03-8F4B-BFC05D77359E} = {3B82A1CE-5933-453E-969B-FFCC3F5AA97D}
 		{9FD727CB-EC5E-454F-906F-9F7F2A578AAC} = {55E5FFEE-5C3B-49FB-91FD-AEB830538352}
+		{C98BECBB-66EC-4087-824B-394F696F6D17} = {3B82A1CE-5933-453E-969B-FFCC3F5AA97D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75AB797A-89EB-4E7E-8DAF-CDCD5866DBEA}
