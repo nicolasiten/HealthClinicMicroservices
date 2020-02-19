@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DiabetesRisk.Common.Interfaces;
+using DiabetesRisk.Common.Middleware;
+using DiabetesRisk.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +28,9 @@ namespace DiabetesRisk
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient<IPatientService, PatientService>();
+            services.AddHttpClient<IPatientNoteService, PatientNoteService>();
+
             services.AddControllers();
         }
 
@@ -37,6 +43,8 @@ namespace DiabetesRisk
             }
 
             app.UseRouting();
+
+            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 
             app.UseAuthorization();
 
