@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DiabetesRisk.Services
 {
-    public class DiabetesRiskService
+    public class DiabetesRiskService : IDiabetesRiskService
     {
         private readonly IPatientService _patientService;
         private readonly IPatientNoteService _patientNoteService;
@@ -22,7 +22,7 @@ namespace DiabetesRisk.Services
             _patientNoteService = patientNoteService;
         }
 
-        public async Task<RiskLevel> DetermineRiskForPatient(int patientId)
+        public async Task<RiskAssessmentModel> DetermineRiskForPatientAsync(int patientId)
         {
             var patient = await _patientService.GetPatientAsync(patientId);
 
@@ -31,26 +31,36 @@ namespace DiabetesRisk.Services
                 throw new NotFoundException("Patient", patientId);
             }
 
+            RiskLevel riskLevel;
+
             var patientNotes = await _patientNoteService.GetNotesByPatientIdAsync(patientId);
 
             if (CheckRiskLevelNone(patient, patientNotes))
             {
-                return RiskLevel.None;
+                riskLevel = RiskLevel.None;
             }
             else if (CheckRiskLevelBorderline(patient, patientNotes))
             {
-                return RiskLevel.Borderline;
+                riskLevel = RiskLevel.Borderline;
             }
             else if (CheckRiskLevelInDanger(patient, patientNotes))
             {
-                return RiskLevel.InDanger;
+                riskLevel = RiskLevel.InDanger;
             }
             else if (CheckRiskLevelEarlyOnset(patient, patientNotes))
             {
-                return RiskLevel.EarlyOnset;
+                riskLevel = RiskLevel.EarlyOnset;
+            }
+            else
+            {
+                throw new NotFoundException("RiskLevel", patientId);
             }
 
-            throw new NotFoundException("RiskLevel", patientId);
+            return new RiskAssessmentModel
+            {
+                RiskLevel = riskLevel,
+                Assessment = $"Patient {patient.Given} {patient.Family} (age {DiabetesRiskUtils.GetAge(patient)}) diabetes assessment is: {DiabetesRiskUtils.ResolveRiskLevelString(riskLevel)}"
+            };
         }
 
         private bool CheckRiskLevelNone(PatientModel patient, IEnumerable<string> patientNotes)

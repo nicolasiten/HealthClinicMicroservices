@@ -1,6 +1,7 @@
 ﻿using DiabetesRisk.Common.Constants;
 using DiabetesRisk.Common.Enums;
 using DiabetesRisk.Models;
+using HealthClinic.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,27 @@ namespace DiabetesRisk.Utils
             }
 
             return numberOfTriggerTerms;
+        }
+
+        public static string ResolveRiskLevelString(RiskLevel riskLevel)
+        {
+            switch (riskLevel)
+            {
+                case RiskLevel.None:
+                    return "None";
+
+                case RiskLevel.Borderline:
+                    return "Borderline";
+
+                case RiskLevel.InDanger:
+                    return "In Danger";
+
+                case RiskLevel.EarlyOnset:
+                    return "Early Onset";
+
+                default:
+                    throw new NotFoundException("Risklevel", riskLevel.ToString());
+            }
         }
     }
 }
