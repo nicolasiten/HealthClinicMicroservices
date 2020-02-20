@@ -21,7 +21,7 @@ namespace DiabetesRisk.Services
             _httpClient = httpClient;
         }
 
-        public async Task<PatientModel> GetPatient(int patientId)
+        public async Task<PatientModel> GetPatientAsync(int patientId)
         {
             var response = await _httpClient.GetAsync($"{_baseUrl}{patientId}");
             var responseString = await response.Content.ReadAsStringAsync();

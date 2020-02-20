@@ -24,7 +24,8 @@ namespace Patient.Models
         public DateTime Dob { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(1)]
+        [RegularExpression(@"^[MFmf]$", ErrorMessage = "Sex has to be either F or M")]
         public string Sex { get; set; }
 
         [Required]

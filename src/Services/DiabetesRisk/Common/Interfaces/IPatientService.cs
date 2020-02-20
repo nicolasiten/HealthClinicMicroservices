@@ -8,6 +8,6 @@ namespace DiabetesRisk.Common.Interfaces
 {
     public interface IPatientService
     {
-        Task<PatientModel> GetPatient(int patientId);
+        Task<PatientModel> GetPatientAsync(int patientId);
     }
 }

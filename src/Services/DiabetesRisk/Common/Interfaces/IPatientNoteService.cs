@@ -7,6 +7,6 @@ namespace DiabetesRisk.Common.Interfaces
 {
     public interface IPatientNoteService
     {
-        Task<IEnumerable<string>> GetNotesByPatientId(int patientId);
+        Task<IEnumerable<string>> GetNotesByPatientIdAsync(int patientId);
     }
 }
