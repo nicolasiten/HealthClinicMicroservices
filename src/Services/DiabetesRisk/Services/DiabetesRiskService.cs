@@ -76,11 +76,32 @@ namespace DiabetesRisk.Services
 
         private bool CheckRiskLevelInDanger(PatientModel patient, IEnumerable<string> patientNotes)
         {
+            Sex sex = DiabetesRiskUtils.GetPatientSex(patient);
+            int age = DiabetesRiskUtils.GetAge(patient);
+            int triggerTerms = DiabetesRiskUtils.GetNumberOfTriggerTermsInNotes(patientNotes);
+
+            if ((age < 30
+                && (sex == Sex.Female && triggerTerms == 4 || sex == Sex.Male && triggerTerms == 3))
+                || age >= 30 && triggerTerms == 6)
+            {
+                return true;
+            }
+
             return false;
         }
 
         private bool CheckRiskLevelEarlyOnset(PatientModel patient, IEnumerable<string> patientNotes)
         {
+            Sex sex = DiabetesRiskUtils.GetPatientSex(patient);
+            int age = DiabetesRiskUtils.GetAge(patient);
+            int triggerTerms = DiabetesRiskUtils.GetNumberOfTriggerTermsInNotes(patientNotes);
+
+            if ((age < 30 && (sex == Sex.Male && triggerTerms == 5 || sex == Sex.Female && triggerTerms == 7))
+                || (sex == Sex.Female && triggerTerms >= 8))
+            {
+                return true;
+            }
+
             return false;
         }
     }
