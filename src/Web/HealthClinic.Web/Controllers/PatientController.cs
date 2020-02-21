@@ -26,7 +26,7 @@ namespace HealthClinic.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(PatientModel patientModel)
+        public async Task<IActionResult> Create(PatientModel patientModel)
         {
             await _patientService.CreateAsync(patientModel);
 

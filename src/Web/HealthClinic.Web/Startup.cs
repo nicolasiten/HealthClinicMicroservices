@@ -27,6 +27,7 @@ namespace HealthClinic.Web
         {
             services.AddHttpClient<IPatientService, PatientService>();
             services.AddHttpClient<IPatientNoteService, PatientNoteService>();
+            services.AddHttpClient<IDiabetesRiskService, DiabetesRiskService>();
 
             services.AddControllersWithViews();
         }

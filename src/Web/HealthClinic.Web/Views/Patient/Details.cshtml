@@ -73,5 +73,6 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Patient.Id }) |
     <a asp-action="ViewAll">Back to List</a>  |
-    <a asp-action="Create" asp-controller="PatientNote" asp-route-patientId="@Model.Patient.Id">Add Note</a>
+    <a asp-action="Create" asp-controller="PatientNote" asp-route-patientId="@Model.Patient.Id">Add Note</a> |
+    <a asp-action="Assessment" asp-controller="DiabetesRisk" asp-route-patientId="@Model.Patient.Id">Create Risk Assessment</a>
 </div>
