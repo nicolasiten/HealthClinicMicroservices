@@ -1,5 +1,6 @@
 ﻿using DiabetesRisk.Common.Constants;
 using DiabetesRisk.Common.Enums;
+using DiabetesRisk.Common.Interfaces;
 using DiabetesRisk.Models;
 using HealthClinic.Common.Exceptions;
 using System;
@@ -27,9 +28,9 @@ namespace DiabetesRisk.Utils
             throw new ArgumentException($"Couldn't match sex {sex}");
         }
 
-        public static int GetAge(PatientModel patient)
+        public static int GetAge(PatientModel patient, IDateTimeService dateTimeService)
         {
-            DateTime today = DateTime.Today;
+            DateTime today = dateTimeService.DateTimeNow();
             int age = today.Year - patient.Dob.Year;
 
             // Go back to the year the person was born in case of a leap year

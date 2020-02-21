@@ -15,11 +15,13 @@ namespace DiabetesRisk.Services
     {
         private readonly IPatientService _patientService;
         private readonly IPatientNoteService _patientNoteService;
+        private readonly IDateTimeService _dateTimeService;
 
-        public DiabetesRiskService(IPatientService patientService, IPatientNoteService patientNoteService)
+        public DiabetesRiskService(IPatientService patientService, IPatientNoteService patientNoteService, IDateTimeService dateTimeService)
         {
             _patientService = patientService;
             _patientNoteService = patientNoteService;
+            _dateTimeService = dateTimeService;
         }
 
         public async Task<RiskAssessmentModel> DetermineRiskForPatientAsync(int patientId)
@@ -59,7 +61,7 @@ namespace DiabetesRisk.Services
             return new RiskAssessmentModel
             {
                 RiskLevel = riskLevel,
-                Assessment = $"Patient {patient.Given} {patient.Family} (age {DiabetesRiskUtils.GetAge(patient)}) diabetes assessment is: {DiabetesRiskUtils.ResolveRiskLevelString(riskLevel)}"
+                Assessment = $"Patient: {patient.Family} {patient.Given} (age {DiabetesRiskUtils.GetAge(patient, _dateTimeService)}) diabetes assessment is: {DiabetesRiskUtils.ResolveRiskLevelString(riskLevel)}"
             };
         }
 
@@ -75,7 +77,7 @@ namespace DiabetesRisk.Services
 
         private bool CheckRiskLevelBorderline(PatientModel patient, IEnumerable<string> patientNotes)
         {
-            if (DiabetesRiskUtils.GetAge(patient) >= 30 
+            if (DiabetesRiskUtils.GetAge(patient, _dateTimeService) >= 30 
                 && DiabetesRiskUtils.GetNumberOfTriggerTermsInNotes(patientNotes) == 2)
             {
                 return true;
@@ -87,7 +89,7 @@ namespace DiabetesRisk.Services
         private bool CheckRiskLevelInDanger(PatientModel patient, IEnumerable<string> patientNotes)
         {
             Sex sex = DiabetesRiskUtils.GetPatientSex(patient);
-            int age = DiabetesRiskUtils.GetAge(patient);
+            int age = DiabetesRiskUtils.GetAge(patient, _dateTimeService);
             int triggerTerms = DiabetesRiskUtils.GetNumberOfTriggerTermsInNotes(patientNotes);
 
             if ((age < 30
@@ -103,7 +105,7 @@ namespace DiabetesRisk.Services
         private bool CheckRiskLevelEarlyOnset(PatientModel patient, IEnumerable<string> patientNotes)
         {
             Sex sex = DiabetesRiskUtils.GetPatientSex(patient);
-            int age = DiabetesRiskUtils.GetAge(patient);
+            int age = DiabetesRiskUtils.GetAge(patient, _dateTimeService);
             int triggerTerms = DiabetesRiskUtils.GetNumberOfTriggerTermsInNotes(patientNotes);
 
             if ((age < 30 && (sex == Sex.Male && triggerTerms == 5 || sex == Sex.Female && triggerTerms == 7))

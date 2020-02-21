@@ -30,6 +30,8 @@ namespace DiabetesRisk
         {
             services.AddHttpClient<IPatientService, PatientService>();
             services.AddHttpClient<IPatientNoteService, PatientNoteService>();
+            services.AddTransient<IDiabetesRiskService, DiabetesRiskService>();
+            services.AddTransient<IDateTimeService, DateTimeService>();
 
             services.AddControllers();
         }
