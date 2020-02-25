@@ -1,5 +1,4 @@
-﻿using DiabetesRisk.Common.Constants;
-using DiabetesRisk.Common.Enums;
+﻿using DiabetesRisk.Common.Enums;
 using DiabetesRisk.Common.Interfaces;
 using DiabetesRisk.Models;
 using DiabetesRisk.Utils;
@@ -37,11 +36,7 @@ namespace DiabetesRisk.Services
 
             var patientNotes = await _patientNoteService.GetNotesByPatientIdAsync(patientId);
 
-            if (CheckRiskLevelNone(patient, patientNotes))
-            {
-                riskLevel = RiskLevel.None;
-            }
-            else if (CheckRiskLevelBorderline(patient, patientNotes))
+            if (CheckRiskLevelBorderline(patient, patientNotes))
             {
                 riskLevel = RiskLevel.Borderline;
             }
@@ -55,7 +50,7 @@ namespace DiabetesRisk.Services
             }
             else
             {
-                throw new NotFoundException("RiskLevel", patientId);
+                riskLevel = RiskLevel.None;
             }
 
             return new RiskAssessmentModel
@@ -65,19 +60,9 @@ namespace DiabetesRisk.Services
             };
         }
 
-        private bool CheckRiskLevelNone(PatientModel patient, IEnumerable<string> patientNotes)
-        {
-            if (DiabetesRiskUtils.GetNumberOfTriggerTermsInNotes(patientNotes) == 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         private bool CheckRiskLevelBorderline(PatientModel patient, IEnumerable<string> patientNotes)
         {
-            if (DiabetesRiskUtils.GetAge(patient, _dateTimeService) >= 30 
+            if (DiabetesRiskUtils.GetAge(patient, _dateTimeService) >= 30
                 && DiabetesRiskUtils.GetNumberOfTriggerTermsInNotes(patientNotes) == 2)
             {
                 return true;
@@ -109,7 +94,7 @@ namespace DiabetesRisk.Services
             int triggerTerms = DiabetesRiskUtils.GetNumberOfTriggerTermsInNotes(patientNotes);
 
             if ((age < 30 && (sex == Sex.Male && triggerTerms == 5 || sex == Sex.Female && triggerTerms == 7))
-                || (sex == Sex.Female && triggerTerms >= 8))
+                || triggerTerms >= 8)
             {
                 return true;
             }
