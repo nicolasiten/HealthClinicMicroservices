@@ -44,7 +44,7 @@ namespace HealthClinic.Web.Services
             var response = await _httpClient.GetAsync($"{_baseUrl}getall");
             var responseString = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<List<PatientModel>>(responseString);
+            return JsonConvert.DeserializeObject<List<PatientModel>>(responseString) ?? new List<PatientModel>();
         }
 
         public async Task<PatientModel> GetByIdAsync(int id)
